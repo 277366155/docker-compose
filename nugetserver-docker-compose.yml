@@ -1,0 +1,16 @@
+version: '2'
+
+services:
+    nugetServer:
+        hostname: nuget-server
+        container_name: nuget-server
+        image: sunside/simple-nuget-server
+        restart: always
+        environment:
+            TZ: Asia/Shanghai
+            NUGET_API_KEY: 'nugetkey123'
+        volumes:
+            - ./db:/var/www/db
+            - ./packagefiles:/var/www/packagefiles
+        ports:
+            - 800:80
