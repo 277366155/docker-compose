@@ -14,7 +14,7 @@ services:
       - DB_SERVER=mongo
       - DB_NAME=yapi
       - DB_PORT=27017
-    # restart: always
+    restart: always
     ports:
       - 3000:3000
     volumes:
@@ -28,7 +28,7 @@ services:
     image: mongo
     container_name: mongo
     privileged: true
-    # restart: always
+    restart: always
     ports:
       - 27017:27017
     volumes:
