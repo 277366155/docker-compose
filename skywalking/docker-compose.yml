@@ -15,11 +15,7 @@ services:
             - ./logs:/usr/share/elasticsearch/logs             
         ports:                                                 
             - 9200:9200                                        
-            - 9300:9300                                        
-        ulimits:                                               
-            memlock:                                           
-                soft: -1                                       
-                hard: -1                                       
+            - 9300:9300                                                                             
                                                                
     oap-server:                                                
         image: apache/skywalking-oap-server:6.6.0-es7          
