@@ -9,7 +9,7 @@ services:
             - discovery.type=single-node                       
             - bootstrap.memory_lock=true                       
             - TAKE_FILE_OWNERSHIP=true                         
-            - "ES_JAVA_OPTS=-Xms256m -Xmx256m"                 
+            - "ES_JAVA_OPTS=-Xms2g -Xmx2g"                 
         volumes:                                               
             - ./data:/usr/share/elasticsearch/data             
             - ./logs:/usr/share/elasticsearch/logs             
