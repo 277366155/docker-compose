@@ -1,0 +1,54 @@
+version: "3"                                                 
+services:                                                    
+    elasticsearch:                                           
+        image: elasticsearch:7.5.1                           
+        hostname: es7-0                                      
+        restart: always                                      
+        container_name: "elasticsearch-0"                    
+        environment:                                         
+            - discovery.type=single-node                     
+            - bootstrap.memory_lock=true                     
+            - TAKE_FILE_OWNERSHIP=true                       
+            - "ES_JAVA_OPTS=-Xms5g -Xmx5g"                   
+        volumes:                                             
+            - ./data:/usr/share/elasticsearch/data           
+            - ./logs:/usr/share/elasticsearch/logs           
+        ports:                                               
+            - 9201:9200                                      
+            - 9301:9300                                      
+        ulimits:                                             
+            memlock:                                         
+                soft: -1                                     
+                hard: -1                                     
+                                                             
+    oap-server:                                              
+        image: apache/skywalking-oap-server:8.9.1            
+        hostname: oap-server-0                               
+        restart: always                                      
+        container_name: "oap-server-0"                       
+        environment:                                         
+            TZ: Asia/Shanghai                                
+            SW_STORAGE: elasticsearch                        
+            SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200  
+        ports:                                               
+            - 12801:12800                                    
+            - 11801:11800                                    
+        depends_on:                                          
+            - elasticsearch                                  
+        links:                                               
+            - elasticsearch                                  
+                                                             
+    skywalking-ui:                                           
+        image: apache/skywalking-ui                          
+        hostname: skywalking-ui                              
+        restart: always                                      
+        container_name: "skywalking-ui-0"                    
+        environment:                                         
+            TZ: Asia/Shanghai                                
+            SW_OAP_ADDRESS: http://oap-server:12800          
+        ports:                                               
+            - 8080:8080                                      
+        links:                                               
+            - oap-server                                     
+        depends_on:                                          
+            - oap-server                                     
