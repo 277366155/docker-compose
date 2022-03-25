@@ -1,44 +1,50 @@
-version: "3"
-services:
-    es7:
-        image: elasticsearch:7.5.1
-        hostname: es7
-        restart: always
-        container_name: "es7"
-        environment:
-            DISCOVERY.TYPE: single-node
-            TAKE_FILE_OWNERSHIP: "true"
-        volumes:
-            - ./data:/usr/share/elasticsearch/data
-            - ./logs:/usr/share/elasticsearch/logs
-        ports:
-            - 9200:9200
-            - 9300:9300
-
-    oap-server:
-        image: apache/skywalking-oap-server:6.6.0-es7
-        hostname: oap-server
-        restart: always
-        container_name: "oap-server"
-        environment:
-            TZ: Asia/Shanghai
-            SW_STORAGE: elasticsearch
-            SW_STORAGE_ES_CLUSTER_NODES: es7:9200
-        ports:
-            - 12800:12800
-            - 11800:11800
-        links:
-            - es7
-
-    skywalking-ui:
-        image: apache/skywalking-ui:6.6.0
-        hostname: skywalking-ui
-        restart: always
-        container_name: "skywalking-ui"
-        environment:
-            TZ: Asia/Shanghai
-            SW_OAP_ADDRESS: oap-server:12800
-        ports:
-            - 8088:8080
-        links:
+version: "3"                                                   
+services:                                                      
+    elasticsearch:                                             
+        image: elasticsearch:7.5.1                             
+        hostname: es7                                          
+        restart: always                                        
+        container_name: "elasticsearch"                        
+        environment:                                           
+            - discovery.type=single-node                       
+            - bootstrap.memory_lock=true                       
+            - TAKE_FILE_OWNERSHIP=true                         
+            - "ES_JAVA_OPTS=-Xms256m -Xmx256m"                 
+        volumes:                                               
+            - ./data:/usr/share/elasticsearch/data             
+            - ./logs:/usr/share/elasticsearch/logs             
+        ports:                                                 
+            - 9200:9200                                        
+            - 9300:9300                                                                             
+                                                               
+    oap-server:                                                
+        image: apache/skywalking-oap-server:6.6.0-es7          
+        hostname: oap-server                                   
+        restart: always                                        
+        container_name: "oap-server"                           
+        environment:                                           
+            TZ: Asia/Shanghai                                  
+            SW_STORAGE: elasticsearch                          
+            SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200    
+        ports:                                                 
+            - 12800:12800                                      
+            - 11800:11800                                      
+        links:                                                 
+            - elasticsearch                                    
+        depends_on:                                            
+            - elasticsearch                                    
+                                                               
+    skywalking-ui:                                             
+        image: apache/skywalking-ui:6.6.0                      
+        hostname: skywalking-ui                                
+        restart: always                                        
+        container_name: "skywalking-ui"                        
+        environment:                                           
+            TZ: Asia/Shanghai                                  
+            SW_OAP_ADDRESS: oap-server:12800                   
+        ports:                                                 
+            - 8088:8080                                        
+        links:                                                 
+            - oap-server                                       
+        depends_on:                                            
             - oap-server
