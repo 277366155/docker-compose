@@ -11,20 +11,35 @@ services:
         - 22122:22122
         
 
-    fastdfs_storage:
-      container_name: fastdfs_storage
+    #fastdfs_storage_1和fastdfs_storage_2都注册到tracker中，上传文件时，两个容器的文件仓库都会上传副本，且文件名和路径相同
+    fastdfs_storage_1:
+      container_name: fastdfs_storage_1
       image: season/fastdfs:1.2
       restart: always
       entrypoint: "/entrypoint.sh storage"
       environment:
         TRACKER_SERVER: fastdfs_tracker:22122
       volumes:
-        - ./data/storage:/fastdfs/store_path
+        - ./data/storage_1:/fastdfs/store_path
       depends_on:
         - fastdfs_tracker
       links:
         - fastdfs_tracker
-    
+   
+    fastdfs_storage_2:
+      container_name: fastdfs_storage_2
+      image: season/fastdfs:1.2
+      restart: always
+      entrypoint: "/entrypoint.sh storage"
+      environment:
+        TRACKER_SERVER: fastdfs_tracker:22122
+      volumes:
+        - ./data/storage_2:/fastdfs/store_path
+      depends_on:
+        - fastdfs_tracker
+      links:
+        - fastdfs_tracker
+
     fastdfs_nginx:
       container_name: fastdfs_nginx
       image: season/fastdfs:1.2
@@ -33,11 +48,13 @@ services:
       environment:
         TRACKER_SERVER: fastdfs_tracker:22122
       volumes:
-        - ./data/storage:/fastdfs/store_path
-        - ./nginx_conf/nginx.conf:/etc/nginx/conf/nginx.conf
+        - ./data/storage_1:/fastdfs/store_path
+        - ./nginx/conf/nginx.conf:/etc/nginx/conf/nginx.conf
       ports:
         - 8888:80
       depends_on:
-        - fastdfs_storage
+        - fastdfs_storage_1
+        - fastdfs_storage_2
       links:
-        - fastdfs_storage
+        - fastdfs_storage_1
+        - fastdfs_storage_2
