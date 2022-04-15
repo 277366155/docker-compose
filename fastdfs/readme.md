@@ -7,7 +7,7 @@
 - 客户端(Client)：上传下载数据的服务器，也就是我们自己的项目所部署在的服务器。
 
 ### docker容器启动完成以后需要进行一下操作：
-1. 将tracker server的/etc/fdfs/client.conf配置做如下修改（可以在外部修改完成之后docker cp复制进去）：
+1. 将tracker server的/etc/fdfs/client.conf配置做如下修改（可以在tracker_client_conf目录下.conf修改完成之后docker cp复制进去）：
 ```
 track_server=[宿主机ip]:22122
 ```
