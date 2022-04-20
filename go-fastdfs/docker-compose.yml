@@ -1,0 +1,23 @@
+version: '3'
+# docker run --network=host --name fastdfs -v /data/fastdfs_data:/data -p 8080:8080 -e GO_FASTDFS_DIR=/data sjqzhang/go-fastdfs
+services:
+  go-fastdfs-01:
+    container_name: go-fastdfs-01
+    image: sjqzhang/go-fastdfs
+    restart: always
+    environment:
+      - GO_FASTDFS_DIR=/data
+
+    volumes:
+      - ./data/fastdfs_data:/data
+    ports:
+      - 7000:8080
+
+
+  go-fastdfs-web:
+    container_name: go-fastdfs-web
+    image: perfree/fastdfsweb
+    restart: always
+    
+    ports:
+    - 8088:8088
