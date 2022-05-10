@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  helloworld:
+    image: testproject
+    hostname: py.testproject
+    build: ./src/
+    container_name: 'py.helloworld'
+    restart: always
+
+    ports:
+      - 80:80

@@ -1,0 +1,17 @@
+stages:
+  - deploy
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "docker-compose 编译+启动容器"
+    - docker-compose up -d --build
+  after_script:
+    - echo "删除多余无用镜像"
+    - docker image prune -f
+  only: 
+    - master
+  allow_failure: false
+  tags: 
+    - k8s-node1-255.197
+  when: on_success
