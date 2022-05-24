@@ -1,0 +1,16 @@
+version: "3"
+services:
+  nginx:
+    #镜像名称
+    image: nginx
+    #指定容器名称
+    container_name: "nginx.app"
+    #文件挂载
+    volumes:
+      - /home/docker.nginx/www/html:/usr/share/nginx/html
+      #- /home/docker.nginx/conf/nginx.conf:/etc/nginx/conf.d
+      - /home/docker.nginx/nginx:/etc/nginx
+      - /home/docker.nginx/logs:/var/log/nginx
+    #映射端口
+    ports:
+      - "80:80"
