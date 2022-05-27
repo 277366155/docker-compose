@@ -4,6 +4,7 @@ stages:
 deploy_job:
   stage: deploy
   script:
+    - docker-compose down
     - echo "docker-compose 编译+启动容器"
     - docker-compose up -d --build
   after_script:
