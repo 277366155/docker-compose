@@ -1,0 +1,35 @@
+2022/05/27 16:18:30 [notice] 221#221: signal process started
+2022/05/27 16:18:30 [error] 227#227: init_worker_by_lua_file error: /usr/local/openresty/nginx/lua/redisfilter.lua:36: API disabled in the current context
+stack traceback:
+	[C]: in function 'error'
+	/usr/local/openresty/lualib/resty/core/var.lua:103: in function '__index'
+	/usr/local/openresty/nginx/lua/redisfilter.lua:36: in function 'init_redirects'
+	/usr/local/openresty/nginx/lua/redisfilter.lua:94: in main chunk
+2022/05/27 16:27:17 [notice] 228#228: signal process started
+2022/05/27 16:27:17 [error] 235#235: init_worker_by_lua_file error: /usr/local/openresty/nginx/lua/redisfilter.lua:22: API disabled in the current context
+stack traceback:
+	[C]: in function 'error'
+	/usr/local/openresty/lualib/resty/core/var.lua:103: in function '__index'
+	/usr/local/openresty/nginx/lua/redisfilter.lua:22: in function 'init_redirects'
+	/usr/local/openresty/nginx/lua/redisfilter.lua:56: in main chunk
+2022/05/27 16:33:23 [notice] 236#236: signal process started
+2022/05/27 16:33:23 [error] 243#243: init_worker_by_lua_file error: /usr/local/openresty/nginx/lua/redisfilter.lua:22: API disabled in the current context
+stack traceback:
+	[C]: in function 'error'
+	/usr/local/openresty/lualib/resty/core/var.lua:103: in function '__index'
+	/usr/local/openresty/nginx/lua/redisfilter.lua:22: in function 'init_redirects'
+	/usr/local/openresty/nginx/lua/redisfilter.lua:55: in main chunk
+2022/05/27 16:36:52 [notice] 244#244: signal process started
+2022/05/27 16:36:52 [error] 251#251: init_worker_by_lua_file error: /usr/local/openresty/nginx/lua/redisfilter.lua:22: API disabled in the current context
+stack traceback:
+	[C]: in function 'error'
+	/usr/local/openresty/lualib/resty/core/var.lua:103: in function '__index'
+	/usr/local/openresty/nginx/lua/redisfilter.lua:22: in function 'init_redirects'
+	/usr/local/openresty/nginx/lua/redisfilter.lua:55: in main chunk
+2022/05/27 16:56:45 [notice] 252#252: signal process started
+2022/05/27 16:56:45 [error] 258#258: init_worker_by_lua_file error: /usr/local/openresty/nginx/lua/redisfilter.lua:22: API disabled in the current context
+stack traceback:
+	[C]: in function 'error'
+	/usr/local/openresty/lualib/resty/core/var.lua:103: in function '__index'
+	/usr/local/openresty/nginx/lua/redisfilter.lua:22: in function 'init_redirects'
+	/usr/local/openresty/nginx/lua/redisfilter.lua:55: in main chunk

@@ -1,0 +1,24 @@
+version: '3'
+services:
+  yapi01:
+    image: openresty/openresty
+    privileged: true
+    # build: ./
+    container_name: openresty
+    restart: always
+    environment:
+      TZ: Asia/Shanghai
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+      #需要先将docker中的nginx.conf文件拷贝出来，才能添加此文件映射
+      - ./conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./lua:/usr/local/openresty/nginx/lua
+      - ./logs:/usr/local/openresty/nginx/logs
+
+# docker run -it -p 888:80 \
+# --name openresty --restart always \
+# -v /home/openresty0/conf:/usr/local/openresty/nginx/conf \
+# -v /etc/localtime:/etc/localtime \
+# openresty/openresty
