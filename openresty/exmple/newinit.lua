@@ -1,11 +1,11 @@
 #!/usr/bin/lua
 
-local host = "ls-master.redis.rds.aliyuncs.com"
-local password = "Td365comcn@2018"
+local host = "xx.rds.aliyuncs.com"
+local password = "1qazTest"
 local port = 6379
 local db_num = 1
-local key = "CloudPOS:Star_TenantIPList"
-local key2 = "CloudPOS:Star_TenantIds"
+local key = "CloudPOS:xx_TenantIPList"
+local key2 = "CloudPOS:xx_TenantIds"
 
 
 
@@ -71,9 +71,9 @@ local function init_xy_ips(redis_key)
 end
 
 
--- Star
+-- xx
 init_tenantids(key2)
 init_ips(key)
--- XinYun
+-- xy
 init_xy_tenantids(key2)
 init_xy_ips(key)
