@@ -95,8 +95,14 @@ upstream api-java{
 
 server{
     listen 80;
+    # 开启443端口，启用ssl证书
+    listen 443 ssl;
     server_name test-api-local.xx.com.cn;
     access_log /usr/local/openresty/nginx/logs/test-api-local.xx.com.cn.log;
+    # 指定证书位置，手动生成证书方法如下一行：
+    # openssl req -x509 -nodes -days 36500 -newkey rsa:2048 -keyout /usr/local/ssl/nginx.key -out /usr/local/ssl/nginx.crt
+    ssl_certificate /etc/nginx/conf.d/apistar.crt;
+    ssl_certificate_key /etc/nginx/conf.d/apistar.key;
 
     # 匹配以/td-cloud/operation-service/开头的请求转向http://128.0.255.96:12402/页面。例如：
     # http://test-api-local.xx.com.cn/td-cloud/operation-service/ping.html 实际请求的是http://128.0.255.96:12402/ping.html
