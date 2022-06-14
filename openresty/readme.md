@@ -294,4 +294,16 @@ server{
 修改完成之后，执行命令让nginx重新加载配置：
 > docker exec [containerId] nginx -s reload
 
+## 避坑提醒：
+```
+location /api/v1/{
+    set_by_lua_file $backend /usr/local/openresty/nginx/lua/set_upstream_by_uri.lua api-net api-java;
+    # 注意：proxy_pass=http://$backend 时，请求http://test-api-local.xx.com.cn/api/v1/ping.html，实际请求的是http://128.0.255.96:12402/api/v1/ping.html
+    proxy_pass http://$backend;
+
+    # 注意：proxy_pass=http://$backend/ 时，请求http://test-api-local.xx.com.cn/api/v1/ping.html，实际请求的是http://128.0.255.96:12402/
+    # proxy_pass http://$backend/;
+}
+```
+
 ==如果有报错，可以查看./logs/error.log中的报错信息和具体报错行数==
