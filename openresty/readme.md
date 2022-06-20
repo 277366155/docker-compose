@@ -1,3 +1,4 @@
+# openresty中使用lua+nginx实现转发策略
 ## 一、准备工作
 #### 环境搭建，基础配置
 使用docker容器搭建环境，docker-compose.yml如下内容：
@@ -25,7 +26,7 @@ services:
         - ./logs:/usr/local/openresty/nginx/logs
 ```
 注意，此时./conf/nginx.conf内容如下
-> 其中 [ ++include /etc/nginx/conf.d/*.conf;++ ] 一行声明了/etc/nginx/conf.d/目录下的所有conf文件都被包含到nginx配置中：
+> 其中 [ include /etc/nginx/conf.d/*.conf; ] 一行声明了/etc/nginx/conf.d/目录下的所有conf文件都被包含到nginx配置中：
 ```
 # nginx.conf  --  docker-openresty
 #
@@ -307,3 +308,4 @@ location /api/v1/{
 ```
 
 ==如果有报错，可以查看./logs/error.log中的报错信息和具体报错行数==
+
