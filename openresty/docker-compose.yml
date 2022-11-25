@@ -1,6 +1,6 @@
 version: '3'
 services:
-  yapi01:
+  openresty:
     image: openresty/openresty
     privileged: true
     # build: ./
