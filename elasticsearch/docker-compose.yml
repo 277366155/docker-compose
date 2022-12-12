@@ -1,0 +1,21 @@
+version: '3'
+services:
+  es-01:
+    container_name: es-01
+    image: elasticsearch:7.17.7
+    restart: always
+    environment:
+      - discovery.type=single-node
+      - TAKE_FILE_OWNERSHIP=true
+      - "ES_JAVA_OPTS=-Xms2000m -Xmx2000m"
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - ./elas_data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+      - 5601:5601
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
