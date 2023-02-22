@@ -1,0 +1,9 @@
+version: "3"
+services:
+    tinyproxy:
+        image: dannydirect/tinyproxy
+        container_name: "tinyproxy"
+        
+        command: "ANY"
+        ports:
+          - 8889:8888
