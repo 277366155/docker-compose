@@ -8,9 +8,7 @@ services:
     restart: always
     environment:
       TZ: Asia/Shanghai
-    ports:
-      - 80:80
-      - 443:443
+    network_mode: host
     volumes:
       - ./nginx/conf.d/:/etc/nginx/conf.d/
       #需要先将docker中的nginx.conf文件拷贝出来，才能添加此文件映射
