@@ -1,3 +1,4 @@
+**！！！注意，使用docker部署openresty要使用host网络模式！！！**
 # openresty中使用lua+nginx实现转发策略
 ## 一、准备工作
 #### 环境搭建，基础配置
@@ -13,8 +14,7 @@ services:
     restart: always
     environment:
         TZ: Asia/Shanghai
-    ports:
-        - 80:80
+    network_mode: host
     volumes:
         #可根据域名命名，添加conf配置文件，便于维护不同域名的配置信息
         - ./nginx/conf.d/:/etc/nginx/conf.d/
