@@ -1,5 +1,5 @@
 mindoc:
-  image: registry.cn-hangzhou.aliyuncs.com/mindoc/mindoc:v2.0 
+  image: registry.cn-hangzhou.aliyuncs.com/mindoc-org/mindoc:v2.1 
   container_name: mindoc-app
   privileged: true
   restart: always
