@@ -1,0 +1,47 @@
+version: "3.7"
+services: 
+    mindoc:
+      image: registry.cn-hangzhou.aliyuncs.com/mindoc-org/mindoc:v2.1 
+      container_name: mindoc-app
+      privileged: true
+      restart: always
+      # net: host
+      volumes:
+       # - ./database:/mindoc/database
+        - ./uploads:/mindoc/uploads
+        - /etc/localtime:/etc/localtime
+        - ./favicon.ico:/mindoc/favicon.ico 
+      mem_limit: 1g
+      environment:
+         TZ: Asia/Shanghai
+         MINDOC_RUN_MODE: prod
+         MINDOC_CACHE: "false"
+         MINDOC_CACHE_PROVIDER: file
+         MINDOC_ENABLE_EXPORT: "false"
+         MINDOC_DB_ADAPTER: mysql
+         MINDOC_DB_HOST: db
+         MINDOC_DB_PORT: 3306
+         MINDOC_DB_DATABASE: mindoc
+         MINDOC_DB_USERNAME: tdsa
+         MINDOC_DB_PASSWORD: "Td365Qaz*963/852"
+      dns:
+        - 223.5.5.5
+        - 223.6.6.6
+      ports:
+        - "81:8181"
+      depends_on:
+        - db
+
+    db:
+       image: registry.cn-hangzhou.aliyuncs.com/sixuncloud/mysql:5.7
+       restart: always
+       environment:
+         MYSQL_ROOT_PASSWORD: Td365Qaz*963/852
+         MYSQL_DATABASE: mindoc
+         MYSQL_USER: tdsa
+         MYSQL_PASSWORD: Td365Qaz*963/852
+       ports:
+         - "3306:3306"
+       volumes:
+         - ./data:/var/lib/mysql
+         - ./my.cnf:/etc/mysql/conf.d/my.cnf
