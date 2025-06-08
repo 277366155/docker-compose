@@ -1,0 +1,15 @@
+version: "3"
+services:
+  nginx:
+    #镜像名称
+    image: dockerpull.cn/fatedier/frp
+    #指定容器名称
+    container_name: "frps"
+    restart: always
+    #文件挂载
+    volumes:
+      - ./frp/frps.ini:/etc/frp/frps.ini
+      # - ./frp/frpc.ini:/etc/frp/frpc.ini
+    #映射端口
+    ports:
+      - "80:80"

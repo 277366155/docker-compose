@@ -5,6 +5,7 @@ services:
     image: nginx
     #指定容器名称
     container_name: "nginx.app"
+    restart: always
     #文件挂载
     volumes:
       - /home/docker.nginx/www/html:/usr/share/nginx/html
