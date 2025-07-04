@@ -302,10 +302,10 @@ location /api/v1/{
     # 注意：proxy_pass=http://$backend 时，请求http://test-api-local.xx.com.cn/api/v1/ping.html，实际请求的是http://128.0.255.96:12402/api/v1/ping.html
     proxy_pass http://$backend;
 
-    # 注意：proxy_pass=http://$backend/ 时，请求http://test-api-local.xx.com.cn/api/v1/ping.html，实际请求的是http://128.0.255.96:12402/
+    # 注意：proxy_pass=http://$backend/ 时，请求http://test-api-local.xx.com.cn/api/v1/ping.html，实际请求的是http://128.0.255.96:12402/ping.html
     # proxy_pass http://$backend/;
 }
 ```
 
-==如果有报错，可以查看./logs/error.log中的报错信息和具体报错行数==
+**如果有报错，可以查看./logs/error.log中的报错信息和具体报错行数** 
 

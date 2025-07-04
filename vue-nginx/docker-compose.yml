@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  vue_mall_ws:
+    image: test_vue
+    hostname: test_vue.app    
+    build: ./
+    container_name: "test_vue.app"    
+    environment:
+      - TZ=Asia/Shanghai  
+    networks:
+      - default
+    ports:
+      - 8080:8080
+    restart: always
+    #配置特权运行
+    privileged: true
+    #配置cpu
+    deploy:
+     resources:
+       limits:
+        cpus: '2'
+        memory: 1024M 
+
